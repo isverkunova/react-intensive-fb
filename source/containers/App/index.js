@@ -1,21 +1,22 @@
 // Core
 import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 
+// Components
+import Feed from 'components/Feed';
+
+// Instruments
+import avatar from 'theme/assets/lisa';
+
+const options = {
+    avatar,
+    currentUserFirstName: 'Bart',
+    currentUserLastName:  'Simpson',
+};
+
+@hot(module)
 export default class App extends Component {
     render () {
-        return (
-            <h1
-                style = { {
-                    display:         'flex',
-                    justifyContent:  'center',
-                    alignItems:      'center',
-                    height:          '100vh',
-                    backgroundColor: '#090C14',
-                    color:           '#FFF',
-                    fontSize:        30,
-                } }>
-                Привет! Начало здесь.
-            </h1>
-        );
+        return <Feed { ...options } />;
     }
 }
