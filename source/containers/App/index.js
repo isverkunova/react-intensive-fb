@@ -10,7 +10,7 @@ import avatar from 'theme/assets/lisa';
 
 const options = {
     avatar,
-    currentUserFirstName: 'Bart',
+    currentUserFirstName: 'Lisa',
     currentUserLastName:  'Simpson',
 };
 
