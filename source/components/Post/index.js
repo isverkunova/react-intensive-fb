@@ -10,7 +10,7 @@ import { Consumer } from 'components/HOC/withProfile';
 import Styles from './styles.m.css';
 
 export default class Post extends Component {
-    static PropTypes = {
+    static propTypes = {
         comment: PropTypes.string.isRequired,
         created: PropTypes.number.isRequired,
     };

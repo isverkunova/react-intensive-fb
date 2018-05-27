@@ -16,7 +16,7 @@ export default class Feed extends Component {
             { id: '213', comment: 'Hi there', created: 1526825076849 },
             { id: '456', comment: 'Shalom', created: 1526825076855 }
         ],
-        spinner: true,
+        spinning: true,
     }
     render () {
         const { posts } = this.state;
@@ -27,7 +27,7 @@ export default class Feed extends Component {
 
         return (
             <section className = { Styles.feed }>
-                <Spinner isSpinning = { this.state.spinner } />
+                <Spinner isSpinning = { this.state.spinning } />
                 <StatusBar />
                 <Composer />
                 {postsJSX}
