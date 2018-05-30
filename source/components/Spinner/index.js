@@ -9,10 +9,13 @@ const portal = document.getElementById('spinner');
 
 export default class Spinner extends Component {
     render () {
-        const spinning = this.props;
+        const isSpinning = this.props;
+
+        // console.log(isSpinning);
+
 
         return createPortal(
-            spinning ? <div className = { Styles.spinner } /> : null,
+            isSpinning ? <div className = { Styles.spinner } /> : null,
             portal);
     }
 }
