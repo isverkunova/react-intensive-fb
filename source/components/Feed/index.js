@@ -45,10 +45,10 @@ export default class Feed extends Component {
 
         await delay(600);
 
-        this.setState({
-            posts:    this.state.posts.filter((post) => post.id !== id),
+        this.setState(({ posts }) => ({
+            posts:    posts.filter((post) => post.id !== id),
             spinning: false,
-        });
+        }));
     }
 
     _setSpinningState (state) {
@@ -62,7 +62,7 @@ export default class Feed extends Component {
 
         const post = {
             id:      getUniqueID(),
-            created: moment.now(),
+            created: moment.utc().unix(),
             comment,
             likes:   [],
         };
