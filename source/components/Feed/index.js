@@ -40,8 +40,14 @@ export default class Feed extends Component {
         spinning: false,
     };
 
-    _removePost (smth) {
-        console.log(smth);
+    async _removePost (id) {
+        this._setSpinningState(true);
+
+        await delay(600);
+
+        this.setState({
+            posts: this.state.posts.filter((post) => post.id !== id),
+        });
     }
 
     _setSpinningState (state) {
@@ -69,7 +75,6 @@ export default class Feed extends Component {
     }
 
     async _likePost (id) {
-        console.log(id);
         const { currentUserFirstName, currentUserLastName } = this.props;
 
         this._setSpinningState(true);
