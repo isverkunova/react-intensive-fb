@@ -46,7 +46,8 @@ export default class Feed extends Component {
         await delay(600);
 
         this.setState({
-            posts: this.state.posts.filter((post) => post.id !== id),
+            posts:    this.state.posts.filter((post) => post.id !== id),
+            spinning: false,
         });
     }
 
