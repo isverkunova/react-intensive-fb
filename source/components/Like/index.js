@@ -85,7 +85,7 @@ export default class Like extends Component {
         } else if (likes.length === 2 && likedByMe) {
             return `You and ${likes.length - 1} other`;
         } else if (likedByMe) {
-            return `You and ${likes.length} others`;
+            return `You and ${likes.length - 1} others`;
         }
 
         return likes.length;
