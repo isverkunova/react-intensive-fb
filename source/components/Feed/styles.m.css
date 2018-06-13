@@ -23,9 +23,9 @@
     }
 
     & .postOutEnd {
-    transform: scale(.5);
-    transition: opacity 400ms var(--cubic2),
-        transform 400ms var(--cubic2);
-    opacity: .01;
+        transform:  scale(.5);
+        transition: opacity 400ms var(--cubic2),
+            transform 400ms var(--cubic2);
+        opacity: .01;
     }
 }
