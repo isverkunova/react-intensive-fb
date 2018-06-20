@@ -21,12 +21,11 @@ const updatedState = {
 
 const result = mount(<Composer { ...props } />);
 const result2 = render(<Composer { ...props } />);
-//const result3 = shallow(<Composer { ...props } />);
 
 const _submitCommentSpy = jest.spyOn(result.instance(), '_submitComment');
 const _handleFormSubmitSpy = jest.spyOn(result.instance(), '_handleFormSubmit');
 const _submitOnEnterSpy = jest.spyOn(result.instance(), '_submitOnEnter');
-//const _preventDef = jest.spyOn(result3.instance(), '_submitOnEnter');
+const _preventDef = jest.spyOn(result.instance(), '_submitOnEnter');
 
 describe('Composer component:', () => {
     // Markup existence
@@ -103,7 +102,7 @@ describe('Composer component:', () => {
     });
 
     test('_submitOnEnterSpy class method should be invoked once after form is submitted on Enter', () => {
-        result.find('textarea').simulate('keyPress');
+        result.find('textarea').simulate('keyPress', { preventDefault: jest.fn(), enterKey: 'Enter' });
 
         expect(_submitOnEnterSpy).toHaveBeenCalledTimes(1);
     });
@@ -120,9 +119,9 @@ describe('Composer component:', () => {
         expect(_submitCommentSpy(!comment)).toBeNull();
     });
 
-    // test('event.preventDefault() should be called after form is submitted on Enter', () => {
-    //     result.find('textarea').simulate('keyPress', { preventDefault: jest.fn(), enterKey: 'Enter' });
-    //     console.log(_preventDef);
-    //     expect(_preventDef).toHaveBeenCalledTimes(1);
-    // });
+    test('event.preventDefault() should be called after form is submitted on Enter', () => {
+        //result.find('textarea').simulate('keyPress', { preventDefault: jest.fn(), enterKey: 'Enter' });
+        //console.log(_preventDef);
+        expect(_preventDef).toHaveBeenCalledTimes(1);
+    });
 });
