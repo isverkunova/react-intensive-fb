@@ -25,12 +25,8 @@ const result2 = render(<Composer { ...props } />);
 const _submitCommentSpy = jest.spyOn(result.instance(), '_submitComment');
 const _handleFormSubmitSpy = jest.spyOn(result.instance(), '_handleFormSubmit');
 const _submitOnEnterSpy = jest.spyOn(result.instance(), '_submitOnEnter');
-const _preventDef = jest.spyOn(result.instance(), '_submitOnEnter');
 
-const prevDefMock = {
-    preventDefault: jest.fn(),
-    enterKey:       'Enter',
-};
+const _preventDefaultMock = jest.fn();
 
 describe('Composer component:', () => {
     // Markup existence
@@ -107,13 +103,15 @@ describe('Composer component:', () => {
     });
 
     test('_submitOnEnterSpy class method should be invoked once after form is submitted on Enter', () => {
-        result.find('textarea').simulate('keyPress', prevDefMock);
+        result.find('textarea').simulate('keyPress');
 
         expect(_submitOnEnterSpy).toHaveBeenCalledTimes(1);
     });
 
     test('should respond to textarea placeholder properly', () => {
-        expect(result2.find('textarea').attr('placeholder')).toEqual(`What's on your mind, ${props.currentUserFirstName}?`);
+        expect(result2.find('textarea').attr('placeholder')).toEqual(
+            `What's on your mind, ${props.currentUserFirstName}?`,
+        );
     });
 
     test('should respond to img src properly', () => {
@@ -125,7 +123,11 @@ describe('Composer component:', () => {
     });
 
     test('event.preventDefault() should be called after form is submitted on Enter', () => {
-        //result.find('textarea').simulate('keyPress', { preventDefault: jest.fn(), enterKey: 'Enter' });
-        expect(_preventDef).toHaveBeenCalledTimes(1);
+        result.find('textarea').simulate('keyPress', {
+            preventDefault: _preventDefaultMock,
+            key:            'Enter',
+        });
+        expect(_preventDefaultMock).toHaveBeenCalledTimes(1);
+        expect(_submitOnEnterSpy).toHaveBeenCalledTimes(2);
     });
 });
