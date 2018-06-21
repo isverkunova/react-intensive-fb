@@ -47,7 +47,11 @@ export class Composer extends Component {
     _submitOnEnter = (event) => {
         const enterKey = event.key === 'Enter';
 
+        console.log(event.key);
+
         if (enterKey) {
+            console.log(enterKey);
+            console.log(event.key);
             event.preventDefault();
             this._submitComment();
         }
