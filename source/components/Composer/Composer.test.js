@@ -3,10 +3,16 @@ import React from 'react';
 import { mount, render } from 'enzyme';
 import { Composer } from './';
 
+const _createPostMock = jest.fn();
+const _preventDefaultMock = jest.fn();
+
+const avatar = 'https://www.avatar.com';
+const currentUserFirstName = 'Brad';
+
 const props = {
-    _createPost:          jest.fn(),
-    avatar:               'avatar',
-    currentUserFirstName: 'currentUserFirstName',
+    _createPost: _createPostMock,
+    currentUserFirstName,
+    avatar,
 };
 
 const comment = 'Merry Christmas!';
@@ -20,13 +26,11 @@ const updatedState = {
 };
 
 const result = mount(<Composer { ...props } />);
-const result2 = render(<Composer { ...props } />);
+const markup = render(<Composer { ...props } />);
 
 const _submitCommentSpy = jest.spyOn(result.instance(), '_submitComment');
 const _handleFormSubmitSpy = jest.spyOn(result.instance(), '_handleFormSubmit');
 const _submitOnEnterSpy = jest.spyOn(result.instance(), '_submitOnEnter');
-
-const _preventDefaultMock = jest.fn();
 
 describe('Composer component:', () => {
     // Markup existence
@@ -109,13 +113,13 @@ describe('Composer component:', () => {
     });
 
     test('should respond to textarea placeholder properly', () => {
-        expect(result2.find('textarea').attr('placeholder')).toEqual(
+        expect(markup.find('textarea').attr('placeholder')).toEqual(
             `What's on your mind, ${props.currentUserFirstName}?`,
         );
     });
 
     test('should respond to img src properly', () => {
-        expect(result2.find('img').attr('src')).toBe(props.avatar);
+        expect(markup.find('img').attr('src')).toBe(props.avatar);
     });
 
     test('"!comment" should return null', () => {

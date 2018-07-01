@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--paletteColor3);
     min-height: 100vh;
+    background-color: var(--paletteColor3);
+    padding-top: 20px;
 
     & .postInStart {
         transform: scale(.5);
